@@ -111,6 +111,7 @@ class CsvAdaptedPerson {
         final Income modelIncome = new Income(income);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelIncome, modelTags);
     }
 
