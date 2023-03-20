@@ -13,17 +13,10 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
         this.keywords = keywords;
     }
 
-    /**
-     * Returns true if the search query matches the contact's name partially.
-     */
     @Override
     public boolean test(Person person) {
-        for (String listItem : keywords) {
-            if (person.getName().fullName.toLowerCase().contains(listItem.toLowerCase())) {
-                return true;
-            }
-        }
-        return false;
+        return keywords.stream()
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }
 
     @Override
