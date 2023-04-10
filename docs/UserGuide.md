@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-E-Lister is **a comprehensive desktop app**, **specially designed** for **insurance agents and other financial professionals** to **streamline the management of their customers' contact information**.  This powerful tool provides a simple and intuitive interface, allowing users to not only easily **add, edit, tag and filter out** for contact information via Graphical User Interface (GUI) but also **see the history of commands that the users keyed in and executed** so that they can keep **a record of their workflow progress**, hence improving productivity.
+E-Lister is a comprehensive **desktop app**, specially designed for **insurance agents and other financial professionals** to **streamline the management of their customers' contact information**.  This powerful tool provides a simple and intuitive interface, allowing users to:
+- easily operate with the contact information via CLI (Command Line Interface)
+- **see the history of commands that the users keyed in and executed** so that they can keep **a record of their workflow progress**, hence improving productivity.
 
 * Table of Contents
 {:toc}
@@ -27,7 +29,7 @@ E-Lister is **a comprehensive desktop app**, **specially designed** for **insura
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/10000` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -49,7 +51,7 @@ E-Lister is **a comprehensive desktop app**, **specially designed** for **insura
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Words separated by `|` indicate that you should only pick one of the keywords.<br>
-  e.g. `all|shown` indicates that you may enter either `all` or `shown`.
+  e.g. `shown|all` indicates that you may enter either `shown` or `all`.
 
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
@@ -66,11 +68,12 @@ E-Lister is **a comprehensive desktop app**, **specially designed** for **insura
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+
 </div>
 
 ### Viewing help : `help`
 
-Shows a help message detailing the various commands available in E-Lister. 
+Shows a help message detailing the various commands available in E-Lister.
 A link can also bring the user to the online user guide for more detailed help.
 
 Format: `help`
@@ -81,13 +84,16 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INCOME [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS i/INCOME [t/TAG] [t/MORE_TAGS]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
+Income field can only have 5 decimals and smaller than 1 Trillion.
 </div>
 
 Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/10000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal i/10000`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/400`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 i/200 t/criminal`
 
@@ -106,7 +112,7 @@ Format: `list`
 
 Edits an existing person in the address book.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME] [t/TAG] [t/MORE_TAGS]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -114,6 +120,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
+* Income field can only have 5 decimals and smaller than 1 Trillion.
 
 Examples:
 *  `edit 1 p/91234567 e/alex_clone@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `alex_clone@example.com` respectively.![edit example](images/editExample.png)
@@ -157,14 +164,14 @@ Examples:
 
 Adds a tag to any given person stored in the address book.
 
-Format: `tag INDEX t/TAG`
+Format: `tag INDEX [tagName]`
 
 * Adds `TAG` to the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Examples:
-* `list` followed by `add_tag 2 banker` adds the tag “banker” to the 2nd person.
+* `list` followed by `tag 2 banker` adds the tag “banker” to the 2nd person.
 * `tag 1 billionaire` will add the tag "billionaire" to the 1st person (which is Alex in this example).![add tag example](images/tagExample.png)
 
 ### Deleting a tag : `delete_tag`
@@ -173,56 +180,81 @@ Deletes a tag on a person.
 
 Format: `delete_tag INDEX TAG`
 
-* Deletes `TAG` on the person at the specified `INDEX`.
+* Deletes `TAG` from the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
-* The tag must be existed.
+* The tag must exist.
 
 Examples:
 * `list` followed by `delete_tag 3 teacher` deletes the tag "teacher" from the 3rd person(only if there's a person with index 3 and carrying tag "teacher").
-* `delete_tg 1 t/billionaire` will delete the tag "billionair" from the 1st person (which is Alex in this example).![delete tag example](images/deleteTagExample.png)
+* `delete_tag 1 t/billionaire` will delete the tag "billionaire" from the 1st person (which is Alex in this example).![delete_tag example](images/deleteTagExample.png)
 
 ### Filter by fields : `filter`
 
-Search for persons whose fields all match one or more regexes.
+Search for persons whose fields all match one or more keywords.
+
+* Note that these keywords are case-sensitive, unlike `find`.
 
 Format: `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME] [t/TAG] [n/MORE_NAMES] ...`
 
-* Displays the data of persons who's every field matches at least one respective regex,
-if such a regex exists for that field.
+* Displays the data of persons who:
+  * For every field you entered one or more keywords for,
+    * that person's field matches at least one of those keywords.
 
 Examples:
-* `filter t/^banker$` will list all persons with exactly the tag “banker”.
-* `filter e/.*\.org$ n/rin e/.*\.net$` will list all persons with the substring "rin" in their name,
+
+* `filter t/bank` will list all persons with a tag containing "bank", such as `banker`, `bankrupt`, or `riverbanks`.
+* `filter p/8765 e/hotmail` will list all persons with a phone number containing "8765", and an email address containing "hotmail".
+* `filter e/org e/net` will list all persons with email addresses containing "org" **or** "net".
+
+Important note:
+* These keywords are matched as [regular expressions](https://regexone.com/).
+  * This gives you more flexibility in finding matches, but means that using non-alphanumeric characters, like `$`, `.`, `-` or `*`, might display unexpected results.
+  * If you need to non-alphanumeric characters anyway, write a backslash "\\" before each such character:
+  * `filter a/\#459\-2965 \\ Navarro` will list all persons with an address containing "#459-2965 \ Navarro".
+
+Advanced examples:
+
+* `filter t/^bank$` will list all persons with exactly the tag `bank`,
+and will not match `banker` or `bankrupt`.
+* `filter i/.{7}` will list all persons with 7 or more digits in their income.
+* `filter e/.*\.org$ n/(?<!len)rin(?!len) e/.*\.net$` will list all persons with the substring "rin" but not "len" in their name,
 as well as an email that ends in ".org" or ".net".
 
 ### Freezing the display : `freeze`
 
-Freezes the current _selection_ of persons displayed. The details of these persons will still be updated,
-if modified.
+Freezes the current <span style="color:green">selection</span> of persons displayed.
+
+* By default, persons which no longer satisfy the conditions of the most recent `find`/`filter` are automatically dropped from the visible list.
+  * This can happen e.g. if you `filtered` for a tag `x`, but then deleted `x` from a displayed Person.
+  * `freeze` temporarily prevents persons from being hidden from view in such a scenario.
+
+<span style="color:red">The visible details **within** each Person will still be updated,
+if modified.</span>
 
 Format: `freeze`
 
 * Commands that reference indices / the list of persons being displayed will be subject to `freeze`,
 and will act on the display as it appears to you.
+* The effects of a `freeze` are withdrawn when a new `list`, `find`, or `filter` command is entered.
 
 ### Unfreezing the display : `unfreeze`
 
-Unfreezes the current _selection_ of persons displayed. Any changes to the selection which were previously withheld
+Unfreezes the current <span style="color:green">selection</span> of persons displayed. Any changes to the selection which were previously withheld
 due to a `freeze` will now be applied.
 
 Format: `unfreeze`
 
 ### Creating a shortcut : `shortcut`
 
-Allows the user to create a shortcut for a command; this shortcut can be used in place of the command instead.
+Allows the user to create a shortcut for a command; this shortcut can be used in place of the command.
 
-The shortcut will be saved and can still be used when the user exits E-Lister and re-opens it. 
+The shortcut will be saved and can still be used when the user exits E-Lister and re-opens it.
 
 Format: `shortcut ORIGINAL_COMMAND SHORTCUT`
 
-* The shortcut cannot be the same as any of the words already existing in E-Lister.
-* The shortcut can only consist of uppercase and lowercase characters in the English alphabet. 
+* The shortcut cannot be the same as any existing command or shortcut.
+* The shortcut should only consist of alphanumeric characters.
 
 Examples:
 * `shortcut list lst` will allow the user to input `lst` in place of `list`.
@@ -246,9 +278,13 @@ Undo one or more of the most recent commands done.
 Format: `undo [NUM]`
 
 * Undoes `NUM` of the most recent commands, or the 1 most recent if `NUM` is not specified.
+  * If specified, `NUM` must be a positive integer less than 2^31 ≈ 2 billion.
 * Only undoes commands which affect data or the display. E.g.:
   * `edit`, `filter`, `freeze`, and `import` can be undone
   * `help` and `export` cannot be undone; `undo` will skip them for the next most recent command.
+* Only undoes commands executed within the current session.
+  * **If the program is closed and relaunched, commands performed before the relaunch will no longer be undoable,
+  even if they remain visible on the Input Log.**
 
 Examples:
 * `undo 3` will undo the last 3 commands.
@@ -260,6 +296,11 @@ Redo one or more of the most recent commands undone.
 Format: `redo [NUM]`
 
 * Redoes `NUM` of the most recent undone commands, or the 1 most recent if `NUM` is not specified.
+  * If specified, `NUM` must be a positive integer less than 2^31 ≈ 2 billion.
+
+* Only redoes commands undone within the current session.
+    * **If the program is closed and relaunched, commands undone before the relaunch will no longer be redoable,
+      even if they remain visible on the Input Log.**
 
 Examples:
 * `redo 3` will redo 3 commands.
@@ -272,7 +313,7 @@ Format: `clear`
 
 ### Import data from CSV : `import`
 
-Opens a file chooser to select a CSV file containing relevant data and merges with the existing data.
+Opens a file chooser to select and import a CSV file containing relevant data. 
 
 Format: `import [combine|reset]`
 
@@ -282,7 +323,8 @@ Format: `import [combine|reset]`
 
 **Note: Your CSV file must have the following headers in this order: `Name, Phone, Email, Address, Income, Tags`**
 
-![CSV headers example](images/csvHeadersExample.png)
+![CSV headers example](images/importExample.png)
+
 
 ### Export data to CSV : `export`
 
@@ -310,14 +352,14 @@ E-Lister data is saved in the hard disk automatically after any command that cha
 
 ### Editing the data file
 
-E-Lister data is saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+E-Lister data is saved as a JSON file `[JAR file location]/data/elister.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, E-Lister will discard all data and start with an empty data file at the next run.
 </div>
 
-### History Display
-As you can see, at the right side of the application, there is a section which is used to display the commands you inputted and were executed succesfully.
+### Input Log
+On the right side of the application, an Input Log section is available & displays successful commands you have previously entered.
 
 *Why do we need this?* Keeping a record of all commands executed in a contacts managing app is important for several reasons.
 - It provides a historical log of all actions taken by the insurance agent, which can be useful in case of any disputes or discrepancies that may arise in the future.
@@ -348,13 +390,12 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL i/INCOME a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague i/10000`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Tag** | `tag INDEX t/TAG` <br> e.g., tag 2 teacher
-**Delete Tag** | `delete_tag INDEX TAG` <br> e.g, delete_tag 2 teacher
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Export** | `export`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [i/INCOME] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Import** | `import [combine\|reset]`
+**Export** | `export [shown\|all]`
 **Filter** | `filter [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [i/INCOME] [t/TAG] [n/MORE_NAMES] ...`<br> e.g., `filter e/.*\.org$ n/rin e/.*\.net$`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **Freeze** | `freeze`

@@ -25,14 +25,14 @@ You can reach us at the email `T17-3[at]comp.nus.edu.sg`
 [[github](http://github.com/hhchinh2002)]
 [[portfolio](team/hhchinh2002.md)]
 
-* Role: Advisor, Designer
+* Role: Advisor, Designer, Documentation
 * Responsibilities: UI/UX
 
 ### Winson Heng
 
 <img src="images/winsonheng.png" width="200px">
 
-[[github](http://github.com/winsonheng)] 
+[[github](http://github.com/winsonheng)]
 [[portfolio](team/winsonheng.md)]
 
 * Role: Developer
