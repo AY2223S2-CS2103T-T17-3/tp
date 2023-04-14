@@ -394,11 +394,11 @@ Exits the program.
 
 Format: `exit`
 
-### **Saving the data**
+### Saving the data
 
 E-Lister data is saved on the hard disk automatically after any command that changes the data. There is no need to save manually.
 
-### **Editing the data file**
+### Editing the data file
 
 E-Lister data is saved as a JSON file `[JAR file location]/data/elister.json`. Advanced users are welcome to update data directly by editing that data file.
 
