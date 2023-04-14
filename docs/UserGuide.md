@@ -106,12 +106,12 @@ Format: `help`
 
 ![help message](images/helpMessage.png)
 
-### **Basic operations**
+### **Basic Operations**
 
 #### Adding a person: `add`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-If you have an existing CSV dataset, you may choose to <ins>**[import it directly](#import-and-export-csv-file)**</ins> rather than adding each contact individually.
+If you have an existing CSV dataset, you may choose to <ins>**[import it directly](#import-and-export-csv-file)**</ins> rather than add each contact individually.
 </div>
 
 Adds a person to E-Lister.
@@ -125,9 +125,9 @@ Income field can only have 5 decimals and smaller than 1 Trillion.
 
 Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/10000`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal i/10000`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Avenue p/1234567 t/LOWERCLASS i/10000`
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 i/400`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 i/200 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Avenue p/1234567 i/200 t/LOWERCLASS`
 
 ![add example](images/addExample.png)
 
@@ -202,7 +202,8 @@ Clears all entries from E-Lister.
 
 Format: `clear`
 
-### **Tag**
+### **Tag Operations**
+
 #### Adding a tag : `tag`
 
 Adds a tag to any given person stored in E-Lister.
@@ -233,6 +234,7 @@ Examples:
 * `delete_tag 1 t/billionaire` will delete the tag "billionaire" from the 1st person (which is Alex in this example).![delete_tag example](images/deleteTagExample.png)
 
 ### **Advanced Operations**
+
 #### Filter by fields : `filter`
 
 Search for persons whose fields all match one or more keywords.
@@ -335,11 +337,11 @@ Format: `shortcut ORIGINAL_COMMAND SHORTCUT`
 Examples:
 * `shortcut list lst` will allow the user to input `lst` in place of `list`.
 
-### **Import and Export CSV file**
+### **Importing and Exporting CSV Files**
 
 #### Import data from CSV : `import`
 
-Opens a file chooser to select a CSV file containing relevant data and merges with the existing data.
+Opens a file chooser to import a CSV file containing contact information.
 
 Format: `import [combine|reset]`
 
@@ -353,7 +355,7 @@ Format: `import [combine|reset]`
 
 #### Export data to CSV : `export`
 
-Opens a file chooser to select a directory where you can save the data to a CSV file.
+Opens a file chooser which allows you to save the data to a CSV file.
 
 If you wish to export to a new file, you may type its intended name in the **File Name** box and click **Save**. This will create a new CSV file with the exported data. Otherwise, you can select an existing CSV file to overwrite.
 
@@ -365,7 +367,7 @@ Format: `export [shown|all]`
 
 ![export example](images/exportExample.png)
 
-## **Additional info on the User Interface**
+## **Additional Info on the User Interface**
 
 ### Filter Box
 
