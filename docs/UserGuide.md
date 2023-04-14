@@ -91,6 +91,9 @@ Inside the **Person list**, each person has a **Person Card**, this is the break
 * Extraneous input values for commands that do not take in input values (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+You are recommended to take a look at the **[command summary](#command-summary)** and **[command use cases](#command-use-cases)**(in which cases a command could help you). *To access a detailed introduction of a specific command, simply click on the bolded action word located on the left*.
+</div>
 
 </div>
 
